@@ -1,67 +1,38 @@
 <section class="site-section border-bottom" id="team-section">
-    <div class="container">
-        <div class="row mb-5 justify-content-center">
-            <div class="col-md-8 text-center">
-                <h2 class="section-title mb-3" data-aos="fade-up" data-aos-delay="">Make Prediction</h2>
-                <p class="lead" data-aos="fade-up" data-aos-delay="100">Upload your loan application file in <b><span
-                            style=" color:red;">.csv</span> </b> format, select a <b>prediction model</b> , and get
-                    instant results on whether the loan is <span style="color: green;">approved</span> or <span
-                        style="color: red;">rejected</span>.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 text-center" data-aos="fade">
-                <img src="assets/images/processing_data.jpg" style="width: 400px; height:250px" alt="Image"
-                    class="img-fluid">
-            </div>
-        </div>
+  <div class="container">
+    <div class="row mb-5 justify-content-center">
+      <div class="col-md-8 text-center">
+        <h2 class="section-title mb-3">Make Prediction</h2>
+        <p class="lead">
+          Upload your loan application file in <b style="color:red;">.csv</b> format,
+          select a <b>prediction model</b>, and get instant results.
+        </p>
+      </div>
     </div>
+  </div>
+  <div class="container" style="margin-bottom: 200px;">
+    <div class="row">
+      <div class="col-4 text-center">
+        <h5 style="color:cadetblue;" class="section-title mb-3">Upload Data</h5>
+        <input type="file" (change)="onFileSelected($event)" accept=".csv" style="width: 100%;">
+      </div>
+      <div class="col-4 text-center">
+        <h5 style="color:cadetblue;" class="section-title mb-3">Select Model</h5>
+        <select (change)="onModelSelected($event)" style="width: 100%">
+          <option value="" disabled selected>Select a Model</option>
+          <option value="logistic_regression">Logistic Regression</option>
+          <option value="random_forest">Random Forest</option>
+          <option value="xgboost">XGBoost</option>
+          <option value="catboost">CatBoost</option>
+        </select>
+      </div>
+      <div class="col-4 text-center" style="padding-top: 50px;">
+        <button (click)="onSubmit()" [disabled]="loading" class="btn btn-lg btn-outline-success ">Submit</button>
+      </div>
+    </div>
+
+    <div *ngIf="loading" class="text-center mt-3">
+      <p>Processing... Please wait!</p>
+    </div>
+  </div>
 </section>
-<div class="container" style="margin-bottom: 200px;">
-    <div class="row">
-        <div class="  col-4 text-center" id="fileUpload">
-            <h5>Upload Data</h5>
-        </div>
-        <div class=" col-4 text-center" id="fileUpload">
-            <h5>Process Data</h5>
-        </div>
-        <div class="  col-4 text-center" id="fileUpload">
-            <h5>Prediction Result</h5>
-        </div>
-    </div>
-    <div class="row">
-        <!-- File Upload Section -->
-        <div class="input-group mb-3 col-4 text-center" id="fileUpload">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon01">Input Data</span>
-            </div>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01"
-                    aria-describedby="inputGroupFileAddon01">
-                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-            </div>
-        </div>
-
-        <!-- Model Selection Section -->
-        <div class="input-group col-4 text-center" id="modelSelection">
-            <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                <option selected>Choose the Model...</option>
-                <option value="1">Logistic Regression</option>
-                <option value="2">Random Forest</option>
-                <option value="3">XGBoost</option>
-                <option value="4">LightGBM</option>
-                <option value="5">CatBoost</option>
-            </select>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="submitButton">Submit</button>
-            </div>
-        </div>
-
-        <!-- Result Display Section -->
-        <div class="col-4 text-center" id="resultDisplay">
-
-            <div id="result" class="alert alert-info" role="alert">
-            </div>
-        </div>
-    </div>
-</div>
